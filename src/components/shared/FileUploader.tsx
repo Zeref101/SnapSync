@@ -8,13 +8,15 @@ type FileUploaderProps = {
 }
 
 const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
-  const [file, setFile] = useState<File[]>([])
+  const [file, setFile] = useState<File[]>([]);
   const [fileUrl, setFileUrl] = useState('');
 
   const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+
     setFile(acceptedFiles);
     fieldChange(acceptedFiles);
     setFileUrl(URL.createObjectURL(acceptedFiles[0]))
+
   }, [file])
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -29,16 +31,16 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
       {
         fileUrl ? (
           <>
-          <div className="flex flex-1 justify-center w-full p-5 lg:p-10">
-            <img src={fileUrl} alt="image"
-              className="file_uploader-img"
-            />
-          </div>
-          <p className="file_uploader-label">Click or drag photo to replace</p>
+            <div className="flex flex-1 justify-center w-full p-5 lg:p-10">
+              <img src={fileUrl} alt="image"
+                className="file_uploader-img"
+              />
+            </div>
+            <p className="file_uploader-label">Click or drag photo to replace</p>
           </>
         ) : (
           <div className="file_uploader-box">
-            <img src="public/assets/icons/file-upload.svg"
+            <img src="/assets/icons/file-upload.svg"
               alt="file-upload"
               width={96}
               height={77}
